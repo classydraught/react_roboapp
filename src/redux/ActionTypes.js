@@ -1,0 +1,12 @@
+export const ADD_COURSES = "ADD_COURSES";
+export const ADD_REVIEWS = "ADD_REVIEWS";
+export const ADD_MEMBERS = "ADD_MEMBERS";
+export const ADD_PROMOS = "ADD_PROMOS";
+export const ADD_REVIEW = "ADD_REVIEW";
+export const COURSES_LOADING = "COURSES_LOADING";
+export const PROMOS_LOADING = "PROMOS_LOADING";
+export const MEMBERS_LOADING = "MEMBERS_LOADING";
+export const COURSES_FAILED = "COURSES_FAILED";
+export const PROMOS_FAILED = "PROMOS_FAILED";
+export const MEMBERS_FAILED = "MEMBERS_FAILED";
+export const REVIEWS_FAILED = "REVIEWS_FAILED";
