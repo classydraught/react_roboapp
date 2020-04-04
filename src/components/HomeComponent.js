@@ -132,7 +132,7 @@ function Home(props) {
           <RenderCard
             isLoading={props.memberLoading}
             item={props.member}
-            errMess={props.memberLoading}
+            errMess={props.memberErrorMsg}
             itemInfo="Featured tutor"
           />
         </div>

@@ -111,7 +111,7 @@ class Header extends Component {
             <div className="row row-header">
               <div className="col-12 col-sm-6">
                 <h1>Robovidhya</h1>
-                <p>
+                <p className="text-justify">
                   At Robovidhya, our aim is to upgrade the skills and improve
                   the employability of students and enhancing the skills of
                   professionals by transforming them into real time and

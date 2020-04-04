@@ -3,7 +3,7 @@ import * as actionTypes from "./ActionTypes";
 export const Members = (
   state = {
     isLoading: true,
-    errormsg: null,
+    errMess: null,
     members: [],
   },
   action

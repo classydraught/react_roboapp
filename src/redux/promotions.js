@@ -3,7 +3,7 @@ import * as actionTypes from "./ActionTypes";
 export const Promotions = (
   state = {
     isLoading: true,
-    errormsg: null,
+    errMess: null,
     promotions: [],
   },
   action

@@ -71,6 +71,23 @@ class Main extends Component {
         />
       );
     };
+    const CourseDetailId = ({ match }) => {
+      return (
+        <CourseDetail
+          course={
+            this.props.courses.courses.filter(
+              (course) => course.id === parseInt(match.params.courseId, 10)
+            )[0]
+          }
+          isLoading={this.props.courses.isLoading}
+          errMess={this.props.courses.errMess}
+          reviews={this.props.reviews.reviews.filter(
+            (review) => review.courseId === parseInt(match.params.courseId, 10)
+          )}
+          reviewserrMess={this.props.reviews.errMess}
+        />
+      );
+    };
     return (
       <div>
         <Header />
@@ -82,13 +99,17 @@ class Main extends Component {
           >
             <Switch location={this.props.location}>
               <Route exact path="/home" component={HomePage} />
-              <Route exact path="/aboutus" component={About} />
+              <Route
+                exact
+                path="/aboutus"
+                component={() => <About members={this.props.members} />}
+              />
               <Route
                 exact
                 path="/courses"
                 component={() => <Course courses={this.props.courses} />}
               />
-              <Route path="/courses/:dishId" component={CourseDetail} />
+              <Route path="/courses/:courseId" component={CourseDetailId} />
               <Route exact path="/contactus" component={Contact} />
               <Redirect to="/home" />
             </Switch>
