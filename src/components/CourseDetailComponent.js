@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   CardImg,
   CardBody,
@@ -6,6 +6,11 @@ import {
   CardText,
   Breadcrumb,
   BreadcrumbItem,
+  Label,
+  Row,
+  Modal,
+  ModalHeader,
+  ModalBody,
 } from "reactstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -23,6 +28,130 @@ import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
 import { FadeTransform, Stagger, Fade } from "react-animation-components";
+import Button from "@material-ui/core/Button";
+import RateReviewIcon from "@material-ui/icons/RateReview";
+import { Control, LocalForm, Errors } from "react-redux-form";
+
+const required = (value) => value && value.length;
+const maxLength = (length) => (value) => !value || value.length <= length;
+const minLength = (length) => (value) => value && value.length >= length;
+
+class ReviewForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isModalOpen: false,
+      starRating: 0,
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleComment = this.handleComment.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: parseInt(value),
+    });
+  }
+  handleComment(values) {
+    this.toggleModal();
+    this.props.postReview(
+      this.props.courseId,
+      this.state.starRating,
+      values.author,
+      values.comment
+    );
+  }
+  toggleModal() {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <Button variant="outlined" onClick={this.toggleModal} size="large">
+          <RateReviewIcon />
+          &nbsp;&nbsp;Add review
+        </Button>
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>Submit comment</ModalHeader>
+          <ModalBody>
+            <LocalForm className="container" onSubmit={this.handleComment}>
+              <Row className="form-group">
+                <Label htmlFor="rating">Rating&nbsp;&nbsp;&nbsp;</Label>
+                <Rating
+                  defaultValue={this.state.starRating}
+                  id="starRating"
+                  name="starRating"
+                  onChange={this.handleInputChange}
+                />
+              </Row>
+
+              <Row className="form-group">
+                <Label htmlFor="author">Name</Label>
+                <Control.text
+                  model=".author"
+                  className="form-control"
+                  id="author"
+                  name="author"
+                  placeholder="Your name"
+                  validators={{
+                    required,
+                    minLength: minLength(3),
+                    maxLength: maxLength(15),
+                  }}
+                />
+                <Errors
+                  className="text-danger"
+                  model=".author"
+                  show="touched"
+                  messages={{
+                    required: "Required ",
+                    minLength: "Must be greater than 2 characters ",
+                    maxLength: "Must be 15 characters or less ",
+                  }}
+                />
+              </Row>
+              <Row className="form-group">
+                <Label htmlFor="comment">Comment</Label>
+                <Control.textarea
+                  rows={6}
+                  model=".comment"
+                  className="form-control"
+                  id="comment"
+                  name="comment"
+                  placeholder="Your comment"
+                  validators={{ required, minLength: minLength(3) }}
+                />
+                <Errors
+                  className="text-danger"
+                  model=".comment"
+                  show="touched"
+                  messages={{
+                    required: "Required ",
+                    minLength: "Must be greater than 2 characters ",
+                  }}
+                />
+              </Row>
+              <Row>
+                <Button type="submit" variant="outlined" size="large">
+                  <i className="fa fa-paper-plane">&nbsp;&nbsp;Post</i>
+                </Button>
+              </Row>
+            </LocalForm>
+          </ModalBody>
+        </Modal>
+      </>
+    );
+  }
+}
 
 const totalRating = (reviews) => {
   let sum = 0;
@@ -129,7 +258,7 @@ function RenderCourse({ course, reviews }) {
   );
 }
 
-function RenderReviews({ reviews, courseId }) {
+function RenderReviews({ reviews, courseId, postReview }) {
   if (reviews != null) {
     return (
       <div className="col-12 col-md-5 m-1">
@@ -148,6 +277,7 @@ function RenderReviews({ reviews, courseId }) {
             })}
           </Stagger>
         </ul>
+        <ReviewForm courseId={courseId} postReview={postReview} />
       </div>
     );
   } else {
@@ -192,7 +322,11 @@ const CourseDetail = (props) => {
         </div>
         <div className="row">
           <RenderCourse course={props.course} reviews={props.reviews} />
-          <RenderReviews reviews={props.reviews} courseId={props.course.id} />
+          <RenderReviews
+            reviews={props.reviews}
+            courseId={props.course.id}
+            postReview={props.postReview}
+          />
         </div>
       </div>
     );

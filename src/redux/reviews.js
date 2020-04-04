@@ -1,7 +1,6 @@
 import * as actionTypes from "./ActionTypes";
 export const Reviews = (
   state = {
-    isLoading: true,
     errMess: null,
     reviews: [],
   },

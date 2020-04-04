@@ -14,6 +14,7 @@ import {
   fetchMembers,
   fetchPromotions,
   fetchReviews,
+  postReview,
 } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
@@ -38,6 +39,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchReviews: () => {
     dispatch(fetchReviews());
   },
+  postReview: (courseID, value, author, comment) =>
+    dispatch(postReview(courseID, value, author, comment)),
 });
 
 class Main extends Component {
@@ -85,6 +88,7 @@ class Main extends Component {
             (review) => review.courseId === parseInt(match.params.courseId, 10)
           )}
           reviewserrMess={this.props.reviews.errMess}
+          postReview={this.props.postReview}
         />
       );
     };

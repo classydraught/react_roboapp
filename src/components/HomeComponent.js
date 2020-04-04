@@ -83,10 +83,10 @@ function RenderCard({ item, isLoading, errMess, itemInfo }) {
           </CardContent>
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
-              <i class="fa fa-heart"></i>
+              <i className="fa fa-heart"></i>
             </IconButton>
             <IconButton aria-label="share">
-              <i class="fa fa-share-square"></i>
+              <i className="fa fa-share-square"></i>
             </IconButton>
             <IconButton
               className={clsx(classes.expand, {
@@ -96,7 +96,7 @@ function RenderCard({ item, isLoading, errMess, itemInfo }) {
               aria-expanded={expanded}
               aria-label="show more"
             >
-              <i class="fa fa-arrow-circle-down"></i>
+              <i className="fa fa-arrow-circle-down"></i>
             </IconButton>
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
