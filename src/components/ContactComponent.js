@@ -1,13 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Button,
-  Label,
-  Col,
-  Row,
-} from "reactstrap";
+import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 function Contact() {
   return (
@@ -68,6 +61,7 @@ function Contact() {
             allowfullscreen=""
             aria-hidden="false"
             tabindex="0"
+            title="map"
           ></iframe>
         </div>
       </div>

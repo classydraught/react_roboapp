@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Card,
   CardImg,
   CardBody,
   CardTitle,
@@ -8,18 +7,98 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardContent from "@material-ui/core/CardContent";
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import { amber } from "@material-ui/core/colors";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Rating from "@material-ui/lab/Rating";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
 import { FadeTransform, Stagger, Fade } from "react-animation-components";
-import Divider from "@material-ui/core/Divider";
+
 const totalRating = (reviews) => {
   let sum = 0;
   reviews.reviews.map((review) => (sum += review.value));
   return sum / reviews.reviews.length;
 };
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: "100vw",
+  },
+
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
+  avatar: {
+    backgroundColor: amber["A200"],
+  },
+}));
+
+function RecipeReviewCard({ review }) {
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <Card className={classes.root}>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={classes.avatar}></Avatar>
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title={review.author}
+        subheader={new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+        }).format(new Date(Date.parse(review.date)))}
+      />
+
+      <CardContent>
+        <Rating name="read-only" value={review.value} readOnly />{" "}
+        <span className="ml-5">
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </span>
+      </CardContent>
+
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>{review.comment}</CardContent>
+      </Collapse>
+    </Card>
+  );
+}
 function RenderCourse({ course, reviews }) {
   let finalRating = totalRating({ reviews });
   return (
@@ -30,7 +109,7 @@ function RenderCourse({ course, reviews }) {
           exitTransform: "scale(0.2) translateY(-20%)",
         }}
       >
-        <Card>
+        <div className="card">
           <CardImg top src={baseUrl + course.image} alt={course.name} />
           <CardBody>
             <CardTitle>{course.name}</CardTitle>
@@ -44,7 +123,7 @@ function RenderCourse({ course, reviews }) {
 
             <CardText>{course.description}</CardText>
           </CardBody>
-        </Card>
+        </div>
       </FadeTransform>
     </div>
   );
@@ -55,25 +134,14 @@ function RenderReviews({ reviews, courseId }) {
     return (
       <div className="col-12 col-md-5 m-1">
         <h4>Reviews</h4>
-        <Divider />
-
+        <hr />
         <ul className="list-unstyled">
           <Stagger in>
             {reviews.map((review) => {
               return (
                 <Fade in key={review.id}>
-                  <li>
-                    <p>
-                      {review.author},{" "}
-                      {new Intl.DateTimeFormat("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "2-digit",
-                      }).format(new Date(Date.parse(review.date)))}{" "}
-                    </p>
-                    <Rating name="read-only" value={review.value} readOnly />
-                    <p>"{review.comment}"</p>
-                    <Divider></Divider>
+                  <li className="mb-3">
+                    <RecipeReviewCard review={review} />
                   </li>
                 </Fade>
               );
