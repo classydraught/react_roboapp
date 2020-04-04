@@ -14,7 +14,7 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
@@ -23,7 +23,7 @@ class Header extends Component {
     super(props);
     this.state = {
       isNavOpen: false,
-      isModalOpen: false
+      isModalOpen: false,
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -32,12 +32,12 @@ class Header extends Component {
 
   toggleNav() {
     this.setState({
-      isNavOpen: !this.state.isNavOpen
+      isNavOpen: !this.state.isNavOpen,
     });
   }
   toggleModal() {
     this.setState({
-      isModalOpen: !this.state.isModalOpen
+      isModalOpen: !this.state.isModalOpen,
     });
   }
 
@@ -57,7 +57,7 @@ class Header extends Component {
     return (
       <>
         <div>
-          <Navbar dark expand="md">
+          <Navbar dark expand="md" className="fixed-top">
             <div className="container">
               <NavbarToggler onClick={this.toggleNav} />
               <NavbarBrand className="ml-auto" href="/">
@@ -132,7 +132,7 @@ class Header extends Component {
                   type="text"
                   id="username"
                   name="username"
-                  innerRef={input => (this.username = input)}
+                  innerRef={(input) => (this.username = input)}
                 />
               </FormGroup>
               <FormGroup>
@@ -141,7 +141,7 @@ class Header extends Component {
                   type="password"
                   id="password"
                   name="password"
-                  innerRef={input => (this.password = input)}
+                  innerRef={(input) => (this.password = input)}
                 />
               </FormGroup>
               <FormGroup check>
@@ -149,7 +149,7 @@ class Header extends Component {
                   <Input
                     type="checkbox"
                     name="remember"
-                    innerRef={input => (this.remember = input)}
+                    innerRef={(input) => (this.remember = input)}
                   />
                   Remember me
                 </Label>

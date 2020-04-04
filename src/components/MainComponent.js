@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./HeaderComponent";
 import About from "./AboutComponent";
 import Home from "./HomeComponent";
+import CourseDetail from "./CourseDetailComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Course from "./CourseComponent";
 import Contact from "./ContactComponent";
@@ -87,6 +88,7 @@ class Main extends Component {
                 path="/courses"
                 component={() => <Course courses={this.props.courses} />}
               />
+              <Route path="/courses/:dishId" component={CourseDetail} />
               <Route exact path="/contactus" component={Contact} />
               <Redirect to="/home" />
             </Switch>
