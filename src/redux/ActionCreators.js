@@ -204,3 +204,56 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
       alert("Your comment could not be posted \n" + error.message);
     });
 };
+export const postFeedback = (
+  firstname,
+  lastname,
+  telnum,
+  email,
+  agree,
+  contactType,
+  message
+) => (dispatch) => {
+  const newFeeback = {
+    firstname: firstname,
+    lastname: lastname,
+    telnum: telnum,
+    email: email,
+    agree: agree,
+    contactType: contactType,
+    message: message,
+  };
+  newFeeback.date = new Date().toISOString();
+
+  return fetch(baseUrl + "feedback", {
+    method: "POST",
+    body: JSON.stringify(newFeeback),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        throw error;
+      }
+    )
+    .then((response) => response.json())
+    .then((response) =>
+      alert("Thank you for your !\n" + JSON.stringify(response))
+    )
+    .catch((error) => {
+      console.log("Your feedback haven't posted");
+      alert("Your feedback could not be posted\nError: " + error.message);
+    });
+};

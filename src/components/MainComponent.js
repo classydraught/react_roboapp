@@ -9,12 +9,15 @@ import Contact from "./ContactComponent";
 import Footer from "./FooterComponent";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { connect } from "react-redux";
+import { actions } from "react-redux-form";
+
 import {
   fetchCourses,
   fetchMembers,
   fetchPromotions,
   fetchReviews,
   postReview,
+  postFeedback,
 } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
@@ -41,6 +44,29 @@ const mapDispatchToProps = (dispatch) => ({
   },
   postReview: (courseID, value, author, comment) =>
     dispatch(postReview(courseID, value, author, comment)),
+  postFeedback: (
+    firstname,
+    lastname,
+    telnum,
+    email,
+    agree,
+    contactType,
+    message
+  ) =>
+    dispatch(
+      postFeedback(
+        firstname,
+        lastname,
+        telnum,
+        email,
+        agree,
+        contactType,
+        message
+      )
+    ),
+  resetFeedbackForm: () => {
+    dispatch(actions.reset("feedback"));
+  },
 });
 
 class Main extends Component {
@@ -114,7 +140,16 @@ class Main extends Component {
                 component={() => <Course courses={this.props.courses} />}
               />
               <Route path="/courses/:courseId" component={CourseDetailId} />
-              <Route exact path="/contactus" component={Contact} />
+              <Route
+                exact
+                path="/contactus"
+                component={() => (
+                  <Contact
+                    resetFeedbackForm={this.props.resetFeedbackForm}
+                    postFeedback={this.props.postFeedback}
+                  />
+                )}
+              />
               <Redirect to="/home" />
             </Switch>
           </CSSTransition>
