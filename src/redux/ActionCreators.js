@@ -171,6 +171,7 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
     comment: comment,
   };
   newRating.date = new Date().toISOString();
+  console.log(newRating);
 
   return fetch(baseUrl + "reviews", {
     method: "POST",
@@ -198,7 +199,10 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
       }
     )
     .then((response) => response.json())
-    .then((response) => dispatch(addReview(response)))
+    .then((response) => {
+      dispatch(addReview(response));
+      console.log(response);
+    })
     .catch((error) => {
       console.log("Post comments ", error.message);
       alert("Your comment could not be posted \n" + error.message);

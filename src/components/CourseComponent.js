@@ -14,7 +14,7 @@ import { baseUrl } from "../shared/baseUrl";
 function RenderCourse({ course }) {
   return (
     <Card>
-      <Link to={`/courses/${course.id}`}>
+      <Link to={`/courses/${course._id}`}>
         <CardImg width="100%" src={baseUrl + course.image} alt={course.name} />
         <CardImgOverlay>
           <CardTitle>{course.name}</CardTitle>
@@ -26,7 +26,8 @@ function RenderCourse({ course }) {
 const Course = (props) => {
   const courseCatalog = props.courses.courses.map((course) => {
     return (
-      <div key={course.id} className="col-12 col-md-5 m-1">
+      <div key={course._id} className="col-12 col-md-5 m-1">
+        {console.log(course._id)}
         <RenderCourse course={course} />
       </div>
     );

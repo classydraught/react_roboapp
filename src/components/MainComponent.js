@@ -105,13 +105,13 @@ class Main extends Component {
         <CourseDetail
           course={
             this.props.courses.courses.filter(
-              (course) => course.id === parseInt(match.params.courseId, 10)
+              (course) => course._id === match.params.courseId
             )[0]
           }
           isLoading={this.props.courses.isLoading}
           errMess={this.props.courses.errMess}
           reviews={this.props.reviews.reviews.filter(
-            (review) => review.courseId === parseInt(match.params.courseId, 10)
+            (review) => review.courseId === match.params.courseId
           )}
           reviewserrMess={this.props.reviews.errMess}
           postReview={this.props.postReview}

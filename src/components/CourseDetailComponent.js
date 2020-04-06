@@ -286,6 +286,7 @@ function RenderReviews({ reviews, courseId, postReview }) {
 }
 
 const CourseDetail = (props) => {
+  console.log(props);
   if (props.isLoading) {
     return (
       <div className="container">
@@ -324,7 +325,7 @@ const CourseDetail = (props) => {
           <RenderCourse course={props.course} reviews={props.reviews} />
           <RenderReviews
             reviews={props.reviews}
-            courseId={props.course.id}
+            courseId={props.course._id}
             postReview={props.postReview}
           />
         </div>
