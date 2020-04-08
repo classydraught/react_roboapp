@@ -7,7 +7,6 @@ import {
   Collapse,
   NavItem,
   Jumbotron,
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -17,6 +16,8 @@ import {
   Input,
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
@@ -43,15 +44,8 @@ class Header extends Component {
 
   handleLogin(event) {
     this.toggleModal();
-    alert(
-      "Username: " +
-        this.username.value +
-        " Password: " +
-        this.password.value +
-        " Remember: " +
-        this.remember.checked
-    );
     event.preventDefault();
+    this.props.loginUser(this.username.value, this.password.value);
   }
   render() {
     return (
@@ -65,7 +59,7 @@ class Header extends Component {
                   src="assets/logo_svg.png"
                   width="55"
                   height="50"
-                  alt="Ristorante Con Fusion"
+                  alt="Robovidhya"
                 />
               </NavbarBrand>
               <Collapse isOpen={this.state.isNavOpen} navbar>
@@ -94,11 +88,12 @@ class Header extends Component {
                 <Nav className="ml-auto" navbar>
                   <NavItem>
                     <Button
-                      outline
+                      variant="outlined"
                       style={{ color: "#fff" }}
                       onClick={this.toggleModal}
                     >
-                      <span className="fa fa-sign-in fa-lg"></span> Login
+                      <span className="fa fa-sign-in fa-lg"></span>{" "}
+                      &nbsp;&nbsp;Login
                     </Button>
                   </NavItem>
                 </Nav>
@@ -127,7 +122,7 @@ class Header extends Component {
           <ModalBody>
             <Form onSubmit={this.handleLogin}>
               <FormGroup>
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">Email</Label>
                 <Input
                   type="text"
                   id="username"
@@ -154,9 +149,21 @@ class Header extends Component {
                   Remember me
                 </Label>
               </FormGroup>
-              <Button type="submit" value="submit" color="primary">
-                Login
+
+              <Button
+                type="submit"
+                value="submit"
+                variant="outlined"
+                className="mt-2"
+                size="large"
+              >
+                <span className="fa fa-sign-in fa-lg"></span>
               </Button>
+              <FormGroup className="mt-2">
+                <Link to="/register" onClick={this.toggleModal}>
+                  Not a member? Register here!
+                </Link>
+              </FormGroup>
             </Form>
           </ModalBody>
         </Modal>

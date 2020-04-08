@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./HeaderComponent";
 import About from "./AboutComponent";
 import Home from "./HomeComponent";
+import Register from "./RegisterComponent";
 import CourseDetail from "./CourseDetailComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Course from "./CourseComponent";
@@ -18,6 +19,8 @@ import {
   fetchReviews,
   postReview,
   postFeedback,
+  userRegister,
+  loginUser,
 } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
@@ -66,6 +69,15 @@ const mapDispatchToProps = (dispatch) => ({
     ),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
+  },
+  userRegister: (username, email, password) => {
+    dispatch(userRegister(username, email, password));
+  },
+  resetUserDetails: () => {
+    dispatch(actions.reset("register"));
+  },
+  loginUser: (email, password) => {
+    dispatch(loginUser(email, password));
   },
 });
 
@@ -120,7 +132,7 @@ class Main extends Component {
     };
     return (
       <div>
-        <Header />
+        <Header loginUser={this.props.loginUser} />
         <TransitionGroup>
           <CSSTransition
             key={this.props.location.key}
@@ -147,6 +159,16 @@ class Main extends Component {
                   <Contact
                     resetFeedbackForm={this.props.resetFeedbackForm}
                     postFeedback={this.props.postFeedback}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/register"
+                component={() => (
+                  <Register
+                    userRegister={this.props.userRegister}
+                    resetUserDetails={this.props.resetUserDetails}
                   />
                 )}
               />

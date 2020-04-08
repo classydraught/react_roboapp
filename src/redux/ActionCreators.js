@@ -7,6 +7,7 @@ export const fetchCourses = () => (dispatch) => {
   return fetch(baseUrl + "courses")
     .then(
       (response) => {
+        console.log(response);
         if (response.ok) {
           return response;
         } else {
@@ -171,7 +172,6 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
     comment: comment,
   };
   newRating.date = new Date().toISOString();
-  console.log(newRating);
 
   return fetch(baseUrl + "reviews", {
     method: "POST",
@@ -217,6 +217,8 @@ export const postFeedback = (
   contactType,
   message
 ) => (dispatch) => {
+  console.log(firstname);
+
   const newFeeback = {
     firstname: firstname,
     lastname: lastname,
@@ -259,5 +261,82 @@ export const postFeedback = (
     .catch((error) => {
       console.log("Your feedback haven't posted");
       alert("Your feedback could not be posted\nError: " + error.message);
+    });
+};
+
+export const userRegister = (username, email, password) => () => {
+  const newUser = {
+    name: username,
+    email: email,
+    password: password,
+  };
+  return fetch(baseUrl + "user/signup", {
+    method: "POST",
+    body: JSON.stringify(newUser),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        throw error;
+      }
+    )
+    .then((response) => response.json())
+    .then((response) =>
+      alert("Thank you for registering !\n" + JSON.stringify(response))
+    )
+    .catch((error) => {
+      console.log(error);
+      alert("User not created" + error.message);
+    });
+};
+
+export const loginUser = (email, password) => (dispatch) => {
+  const loginUser = {
+    email: email,
+    password: password,
+  };
+  return fetch(baseUrl + "user/login", {
+    method: "POST",
+    body: JSON.stringify(loginUser),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        throw error;
+      }
+    )
+    .then((response) => response.json())
+    .then((response) => sessionStorage.setItem("RoboKey", response.token))
+    .catch((error) => {
+      console.log(error);
+      alert("login failed / check credentials" + error.message);
     });
 };

@@ -7,3 +7,8 @@ export const InitialFeedback = {
   contactType: "Phone",
   message: "",
 };
+export const RegisterDetails = {
+  username: "",
+  email: "",
+  password: "",
+};
