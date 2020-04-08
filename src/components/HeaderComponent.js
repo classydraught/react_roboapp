@@ -86,16 +86,29 @@ class Header extends Component {
                   </NavItem>
                 </Nav>
                 <Nav className="ml-auto" navbar>
-                  <NavItem>
-                    <Button
-                      variant="outlined"
-                      style={{ color: "#fff" }}
-                      onClick={this.toggleModal}
-                    >
-                      <span className="fa fa-sign-in fa-lg"></span>{" "}
-                      &nbsp;&nbsp;Login
-                    </Button>
-                  </NavItem>
+                  {console.log(this.props.user.LoggedIn)}
+                  {!this.props.user.LoggedIn ? (
+                    <NavItem>
+                      <Button
+                        variant="outlined"
+                        style={{ color: "#fff" }}
+                        onClick={this.toggleModal}
+                      >
+                        <span className="fa fa-sign-in fa-lg"></span>{" "}
+                        &nbsp;&nbsp;Login
+                      </Button>
+                    </NavItem>
+                  ) : (
+                    <NavItem>
+                      <Button
+                        variant="outlined"
+                        style={{ color: "#fff" }}
+                        onClick={this.props.LogOutUser}
+                      >
+                        <i className="fa fa-sign-out"></i> &nbsp;&nbsp;LogOut
+                      </Button>
+                    </NavItem>
+                  )}
                 </Nav>
               </Collapse>
             </div>

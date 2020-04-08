@@ -21,6 +21,7 @@ import {
   postFeedback,
   userRegister,
   loginUser,
+  LogOutUser,
 } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
@@ -29,6 +30,7 @@ const mapStateToProps = (state) => {
     members: state.members,
     reviews: state.reviews,
     promotions: state.promotions,
+    user: state.user,
   };
 };
 
@@ -78,6 +80,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loginUser: (email, password) => {
     dispatch(loginUser(email, password));
+  },
+  LogOutUser: () => {
+    dispatch(LogOutUser());
   },
 });
 
@@ -132,7 +137,11 @@ class Main extends Component {
     };
     return (
       <div>
-        <Header loginUser={this.props.loginUser} />
+        <Header
+          loginUser={this.props.loginUser}
+          LogOutUser={this.props.LogOutUser}
+          user={this.props.user}
+        />
         <TransitionGroup>
           <CSSTransition
             key={this.props.location.key}
