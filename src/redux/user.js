@@ -2,10 +2,13 @@ import * as actionTypes from "./ActionTypes";
 
 export const User = (
   state = {
-    LoggedIn: sessionStorage.getItem("RoboName") ? true : false,
+    LoggedIn: localStorage.getItem("RoboName") ? true : false,
     UserData: {
-      username: sessionStorage.getItem("RoboName"),
-      email: sessionStorage.getItem("RoboMail"),
+      username: localStorage.getItem("RoboName"),
+      email: localStorage.getItem("RoboMail"),
+      propic: localStorage.getItem("profilepic"),
+      id: localStorage.getItem("id"),
+      usercourses: localStorage.getItem("courses"),
     },
     errMess: null,
   },
@@ -20,9 +23,13 @@ export const User = (
         UserData: action.payload,
       };
     case actionTypes.LOGOUT_USER:
-      sessionStorage.removeItem("RoboName");
-      sessionStorage.removeItem("RoboMail");
-      sessionStorage.removeItem("RoboKey");
+      localStorage.removeItem("RoboName");
+      localStorage.removeItem("RoboMail");
+      localStorage.removeItem("RoboKey");
+      localStorage.removeItem("id");
+      localStorage.removeItem("courses");
+      localStorage.removeItem("profilepic");
+
       return {
         ...state,
         LoggedIn: false,

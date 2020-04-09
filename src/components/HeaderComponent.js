@@ -26,6 +26,7 @@ import {
 } from "reactstrap";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
+import { baseUrl } from "../shared/baseUrl";
 
 class Header extends Component {
   constructor(props) {
@@ -101,7 +102,6 @@ class Header extends Component {
                   </NavItem>
                 </Nav>
                 <Nav className="ml-auto" navbar>
-                  {console.log(this.props.user.LoggedIn)}
                   {!this.props.user.LoggedIn ? (
                     <NavItem>
                       <Button
@@ -131,7 +131,13 @@ class Header extends Component {
                                 textDecoration: "none",
                               }}
                             >
-                              <Avatar className="mx-auto" />
+                              <Avatar
+                                className="mx-auto"
+                                src={
+                                  baseUrl + localStorage.getItem("profilepic")
+                                }
+                              />
+                              {console.log(this.props.user)}
                             </Link>
                           </DropdownItem>
                           <Divider />

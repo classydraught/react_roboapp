@@ -286,7 +286,6 @@ function RenderReviews({ reviews, courseId, postReview }) {
 }
 
 const CourseDetail = (props) => {
-  console.log(props);
   if (props.isLoading) {
     return (
       <div className="container">

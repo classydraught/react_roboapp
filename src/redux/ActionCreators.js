@@ -178,7 +178,7 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
     body: JSON.stringify(newRating),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + sessionStorage.getItem("RoboKey"),
+      Authorization: "Bearer " + localStorage.getItem("RoboKey"),
     },
     credentials: "same-origin",
   })
@@ -338,10 +338,22 @@ export const loginUser = (email, password) => (dispatch) => {
     )
     .then((response) => response.json())
     .then((response) => {
-      sessionStorage.setItem("RoboKey", response.token);
-      sessionStorage.setItem("RoboName", response.name);
-      sessionStorage.setItem("RoboMail", response.email);
-      dispatch(loggedinUser(response.email, response.name));
+      console.log(response);
+      localStorage.setItem("RoboKey", response.token);
+      localStorage.setItem("RoboName", response.name);
+      localStorage.setItem("RoboMail", response.email);
+      localStorage.setItem("profilepic", response.image);
+      localStorage.setItem("courses", response.courses);
+      localStorage.setItem("id", response.id);
+      dispatch(
+        loggedinUser(
+          response.email,
+          response.name,
+          response.id,
+          response.image,
+          response.courses
+        )
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -352,9 +364,15 @@ export const loginUser = (email, password) => (dispatch) => {
 export const LogOutUser = () => (dispatch) => {
   dispatch(loggedOutUser());
 };
-export const loggedinUser = (email, username) => ({
+export const loggedinUser = (email, username, id, image, usercourses) => ({
   type: actionTypes.LOGIN_USER,
-  payload: { email: email, username: username },
+  payload: {
+    email: email,
+    username: username,
+    id: id,
+    profilepic: image,
+    courses: usercourses,
+  },
 });
 export const loggedOutUser = () => ({
   type: actionTypes.LOGOUT_USER,

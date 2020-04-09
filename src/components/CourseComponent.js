@@ -27,7 +27,6 @@ const Course = (props) => {
   const courseCatalog = props.courses.courses.map((course) => {
     return (
       <div key={course._id} className="col-12 col-md-5 m-1">
-        {console.log(course._id)}
         <RenderCourse course={course} />
       </div>
     );
