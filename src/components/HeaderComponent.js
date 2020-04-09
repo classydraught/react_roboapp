@@ -18,6 +18,14 @@ import {
 import { NavLink } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+import Avatar from "@material-ui/core/Avatar";
+import Divider from "@material-ui/core/Divider";
 
 class Header extends Component {
   constructor(props) {
@@ -25,9 +33,11 @@ class Header extends Component {
     this.state = {
       isNavOpen: false,
       isModalOpen: false,
+      isdropdownOpen: false,
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -39,6 +49,11 @@ class Header extends Component {
   toggleModal() {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
+    });
+  }
+  toggleDropdown() {
+    this.setState({
+      isdropdownOpen: !this.state.isdropdownOpen,
     });
   }
 
@@ -100,13 +115,46 @@ class Header extends Component {
                     </NavItem>
                   ) : (
                     <NavItem>
-                      <Button
-                        variant="outlined"
-                        style={{ color: "#fff" }}
-                        onClick={this.props.LogOutUser}
+                      <Dropdown
+                        isOpen={this.state.isdropdownOpen}
+                        toggle={this.toggleDropdown}
                       >
-                        <i className="fa fa-sign-out"></i> &nbsp;&nbsp;LogOut
-                      </Button>
+                        <DropdownToggle>
+                          <i className="fa fa-chevron-circle-down "></i>
+                        </DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem>
+                            <Link
+                              to="/profile"
+                              style={{
+                                color: "#0b0704",
+                                textDecoration: "none",
+                              }}
+                            >
+                              <Avatar className="mx-auto" />
+                            </Link>
+                          </DropdownItem>
+                          <Divider />
+                          <DropdownItem>
+                            <Link
+                              to="/home"
+                              style={{
+                                color: "#0b0704",
+                                textDecoration: "none",
+                              }}
+                            >
+                              <i className="fa fa-plus-circle"></i>
+                              &nbsp;&nbsp;Add a Course
+                            </Link>
+                          </DropdownItem>
+                          <DropdownItem
+                            onClick={this.props.LogOutUser}
+                            color="#0b0704"
+                          >
+                            <i className="fa fa-sign-out"></i> Logout
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
                     </NavItem>
                   )}
                 </Nav>

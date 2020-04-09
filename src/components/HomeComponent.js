@@ -46,7 +46,11 @@ function RenderCard({ item, isLoading, errMess, itemInfo }) {
     setExpanded(!expanded);
   };
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   } else if (errMess) {
     return <h4>{errMess}</h4>;
   } else {
@@ -60,17 +64,16 @@ function RenderCard({ item, isLoading, errMess, itemInfo }) {
         <Card className={classes.root}>
           <CardHeader
             avatar={
-              <Avatar aria-label="recipe" className={classes.avatar}>
-                {item.name.charAt(0)}
-              </Avatar>
+              <Avatar
+                aria-label="recipe"
+                className={classes.avatar}
+                src={baseUrl + item.image}
+                alt={itemInfo}
+              ></Avatar>
             }
             title={itemInfo}
           />
-          <CardMedia
-            className={classes.media}
-            image={baseUrl + item.image}
-            title="Paella dish"
-          />
+          <CardMedia className={classes.media} image={baseUrl + item.image} />
           <CardContent>
             <Typography
               variant="body2"

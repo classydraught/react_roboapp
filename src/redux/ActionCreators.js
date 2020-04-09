@@ -178,6 +178,7 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
     body: JSON.stringify(newRating),
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + sessionStorage.getItem("RoboKey"),
     },
     credentials: "same-origin",
   })
@@ -200,7 +201,7 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
     )
     .then((response) => response.json())
     .then((response) => {
-      dispatch(addReview(response));
+      dispatch(addReview(newRating));
       console.log(response);
     })
     .catch((error) => {
@@ -350,7 +351,6 @@ export const loginUser = (email, password) => (dispatch) => {
 
 export const LogOutUser = () => (dispatch) => {
   dispatch(loggedOutUser());
-  alert("User logged out");
 };
 export const loggedinUser = (email, username) => ({
   type: actionTypes.LOGIN_USER,

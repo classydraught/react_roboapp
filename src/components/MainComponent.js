@@ -4,6 +4,7 @@ import About from "./AboutComponent";
 import Home from "./HomeComponent";
 import Register from "./RegisterComponent";
 import CourseDetail from "./CourseDetailComponent";
+import Profile from "./ProfileComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Course from "./CourseComponent";
 import Contact from "./ContactComponent";
@@ -163,6 +164,11 @@ class Main extends Component {
               <Route path="/courses/:courseId" component={CourseDetailId} />
               <Route
                 exact
+                path="/profile"
+                component={() => <Profile user={this.props.user} />}
+              />
+              <Route
+                exact
                 path="/contactus"
                 component={() => (
                   <Contact
@@ -181,6 +187,7 @@ class Main extends Component {
                   />
                 )}
               />
+
               <Redirect to="/home" />
             </Switch>
           </CSSTransition>
