@@ -86,10 +86,10 @@ class Contact extends Component {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.9710286090194!2d78.3841065!3d17.4611007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb917283e616df%3A0x93fc135bbe6cbc99!2sRakesh%20Tech%20Solutions!5e0!3m2!1sen!2sin!4v1585997464072!5m2!1sen!2sin"
               width="350"
               height="350"
-              frameborder="0"
-              allowfullscreen=""
+              frameBorder="0"
+              allowFullScreen=""
               aria-hidden="false"
-              tabindex="0"
+              tabIndex="0"
               title="map"
             ></iframe>
           </div>

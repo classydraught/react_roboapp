@@ -334,9 +334,27 @@ export const loginUser = (email, password) => (dispatch) => {
       }
     )
     .then((response) => response.json())
-    .then((response) => sessionStorage.setItem("RoboKey", response.token))
+    .then((response) => {
+      sessionStorage.setItem("RoboKey", response.token);
+      sessionStorage.setItem("RoboName", response.name);
+      sessionStorage.setItem("RoboMail", response.email);
+      dispatch(loggedinUser(response.email, response.name));
+    })
     .catch((error) => {
       console.log(error);
       alert("login failed / check credentials" + error.message);
     });
 };
+
+export const LogOutUser = () => (dispatch) => {
+  dispatch(loggedOutUser());
+  alert("USer logged out");
+};
+export const loggedinUser = (email, username) => ({
+  type: actionTypes.LOGIN_USER,
+  payload: { email: email, username: username },
+});
+export const loggedOutUser = () => ({
+  type: actionTypes.LOGOUT_USER,
+  payload: {},
+});
