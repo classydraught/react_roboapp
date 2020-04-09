@@ -211,7 +211,7 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
 export const postFeedback = (
   firstname,
   lastname,
-  telnum,
+  phone,
   email,
   agree,
   contactType,
@@ -222,7 +222,7 @@ export const postFeedback = (
   const newFeeback = {
     firstname: firstname,
     lastname: lastname,
-    telnum: telnum,
+    phone: phone,
     email: email,
     agree: agree,
     contactType: contactType,
@@ -230,7 +230,7 @@ export const postFeedback = (
   };
   newFeeback.date = new Date().toISOString();
 
-  return fetch(baseUrl + "feedback", {
+  return fetch(baseUrl + "enquiry", {
     method: "POST",
     body: JSON.stringify(newFeeback),
     headers: {
@@ -256,11 +256,13 @@ export const postFeedback = (
     )
     .then((response) => response.json())
     .then((response) =>
-      alert("Thank you for your !\n" + JSON.stringify(response))
+      alert("Thank you for your Intrest!\n" + JSON.stringify(response))
     )
     .catch((error) => {
-      console.log("Your feedback haven't posted");
-      alert("Your feedback could not be posted\nError: " + error.message);
+      console.log("Your feedback/enquiry haven't posted");
+      alert(
+        "Your feedback/enquiry could not be posted\nError: " + error.message
+      );
     });
 };
 
@@ -342,13 +344,13 @@ export const loginUser = (email, password) => (dispatch) => {
     })
     .catch((error) => {
       console.log(error);
-      alert("login failed / check credentials" + error.message);
+      alert("Wrong Credentials/ Kindly check email or password");
     });
 };
 
 export const LogOutUser = () => (dispatch) => {
   dispatch(loggedOutUser());
-  alert("USer logged out");
+  alert("User logged out");
 };
 export const loggedinUser = (email, username) => ({
   type: actionTypes.LOGIN_USER,

@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
   postFeedback: (
     firstname,
     lastname,
-    telnum,
+    phone,
     email,
     agree,
     contactType,
@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => ({
       postFeedback(
         firstname,
         lastname,
-        telnum,
+        phone,
         email,
         agree,
         contactType,

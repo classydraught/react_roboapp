@@ -14,7 +14,7 @@ import { Stagger, Fade } from "react-animation-components";
 
 function Rendermember({ member }) {
   return (
-    <Fade in>
+    <Fade in key={member._id}>
       <div className="col-12 mt-2">
         <Media tag="li">
           <Media left middle>
@@ -39,7 +39,7 @@ function Rendermember({ member }) {
 
 function About(props) {
   const members = props.members.members.map((member) => {
-    return <Rendermember member={member} key={member.id} />;
+    return <Rendermember member={member} key={member._id} />;
   });
 
   if (props.members.isLoading) {

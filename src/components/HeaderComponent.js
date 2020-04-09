@@ -43,8 +43,8 @@ class Header extends Component {
   }
 
   handleLogin(event) {
-    this.toggleModal();
     event.preventDefault();
+    this.toggleModal();
     this.props.loginUser(this.username.value, this.password.value);
   }
   render() {

@@ -268,7 +268,7 @@ function RenderReviews({ reviews, courseId, postReview }) {
           <Stagger in>
             {reviews.map((review) => {
               return (
-                <Fade in key={review.id}>
+                <Fade in key={review._id}>
                   <li className="mb-3">
                     <RecipeReviewCard review={review} />
                   </li>

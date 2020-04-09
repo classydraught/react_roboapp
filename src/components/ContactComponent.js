@@ -19,10 +19,11 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
+    console.log(values);
     this.props.postFeedback(
       values.firstname,
       values.lastname,
-      values.telnum,
+      values.phone,
       values.email,
       values.agree,
       values.contactType,
@@ -241,16 +242,16 @@ class Contact extends Component {
               </Row>
               <Row className="form-group">
                 <Label htmlFor="message" md={3}>
-                  Your feedback
+                  Your feedback/ Enquiry
                 </Label>
                 <Col md={9}>
-                  <Control.text
+                  <Control.textarea
                     model=".message"
                     className="form-control"
-                    rows="6"
+                    rows="8"
                     id="message"
                     name="message"
-                    placeholder="Your feedback"
+                    placeholder="Your feedback/ Enquiry"
                     validators={{ required }}
                   />
                   <Errors
