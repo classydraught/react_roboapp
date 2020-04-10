@@ -1,12 +1,12 @@
 import * as actionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
 
-export const fetchCourses = () => (dispatch) => {
+export const fetchCourses = () => dispatch => {
   dispatch(coursesLoading(true));
 
   return fetch(baseUrl + "courses")
     .then(
-      (response) => {
+      response => {
         console.log(response);
         if (response.ok) {
           return response;
@@ -18,37 +18,37 @@ export const fetchCourses = () => (dispatch) => {
           throw error;
         }
       },
-      (error) => {
+      error => {
         let errormsg = new Error(error.message);
         throw errormsg;
       }
     )
-    .then((response) => response.json())
-    .then((courses) => dispatch(addCourses(courses)))
-    .catch((error) => dispatch(coursesFailed(error.message)));
+    .then(response => response.json())
+    .then(courses => dispatch(addCourses(courses)))
+    .catch(error => dispatch(coursesFailed(error.message)));
 };
-export const addCourses = (courses) => ({
+export const addCourses = courses => ({
   type: actionTypes.ADD_COURSES,
-  payload: courses,
+  payload: courses
 });
 
 export const coursesLoading = () => ({
-  type: actionTypes.COURSES_LOADING,
+  type: actionTypes.COURSES_LOADING
 });
 
-export const coursesFailed = (errormsg) => ({
+export const coursesFailed = errormsg => ({
   type: actionTypes.COURSES_FAILED,
-  payload: errormsg,
+  payload: errormsg
 });
 
 // Leaders part
 
-export const fetchMembers = () => (dispatch) => {
+export const fetchMembers = () => dispatch => {
   dispatch(membersLoading(true));
 
   return fetch(baseUrl + "members")
     .then(
-      (response) => {
+      response => {
         if (response.ok) {
           return response;
         } else {
@@ -59,35 +59,35 @@ export const fetchMembers = () => (dispatch) => {
           throw error;
         }
       },
-      (error) => {
+      error => {
         let errormsg = new Error(error.message);
         throw errormsg;
       }
     )
-    .then((response) => response.json())
-    .then((members) => dispatch(addMembers(members)))
-    .catch((error) => dispatch(membersFailed(error.message)));
+    .then(response => response.json())
+    .then(members => dispatch(addMembers(members)))
+    .catch(error => dispatch(membersFailed(error.message)));
 };
-export const addMembers = (members) => ({
+export const addMembers = members => ({
   type: actionTypes.ADD_MEMBERS,
-  payload: members,
+  payload: members
 });
 
 export const membersLoading = () => ({
-  type: actionTypes.MEMBERS_LOADING,
+  type: actionTypes.MEMBERS_LOADING
 });
 
-export const membersFailed = (errormsg) => ({
+export const membersFailed = errormsg => ({
   type: actionTypes.MEMBERS_FAILED,
-  payload: errormsg,
+  payload: errormsg
 });
 
 // reviews section
 
-export const fetchReviews = () => (dispatch) => {
+export const fetchReviews = () => dispatch => {
   return fetch(baseUrl + "reviews")
     .then(
-      (response) => {
+      response => {
         if (response.ok) {
           return response;
         } else {
@@ -98,34 +98,34 @@ export const fetchReviews = () => (dispatch) => {
           throw error;
         }
       },
-      (error) => {
+      error => {
         let errormsg = new Error(error.message);
         throw errormsg;
       }
     )
-    .then((response) => response.json())
-    .then((reviews) => dispatch(addReviews(reviews)))
-    .catch((error) => dispatch(reviewsFailed(error.message)));
+    .then(response => response.json())
+    .then(reviews => dispatch(addReviews(reviews)))
+    .catch(error => dispatch(reviewsFailed(error.message)));
 };
 
-export const reviewsFailed = (errormsg) => ({
+export const reviewsFailed = errormsg => ({
   type: actionTypes.REVIEWS_FAILED,
-  payload: errormsg,
+  payload: errormsg
 });
 
-export const addReviews = (reviews) => ({
+export const addReviews = reviews => ({
   type: actionTypes.ADD_REVIEWS,
-  payload: reviews,
+  payload: reviews
 });
 
 // promotions loading
 
-export const fetchPromotions = () => (dispatch) => {
+export const fetchPromotions = () => dispatch => {
   dispatch(promosLoading(true));
 
   return fetch(baseUrl + "promotions")
     .then(
-      (response) => {
+      response => {
         if (response.ok) {
           return response;
         } else {
@@ -136,40 +136,40 @@ export const fetchPromotions = () => (dispatch) => {
           throw error;
         }
       },
-      (error) => {
+      error => {
         let errormsg = new Error(error.message);
         throw errormsg;
       }
     )
-    .then((response) => response.json())
-    .then((promotions) => dispatch(addPromos(promotions)))
-    .catch((error) => dispatch(promosFailed(error.message)));
+    .then(response => response.json())
+    .then(promotions => dispatch(addPromos(promotions)))
+    .catch(error => dispatch(promosFailed(error.message)));
 };
-export const addPromos = (promotions) => ({
+export const addPromos = promotions => ({
   type: actionTypes.ADD_PROMOS,
-  payload: promotions,
+  payload: promotions
 });
 
 export const promosLoading = () => ({
-  type: actionTypes.PROMOS_LOADING,
+  type: actionTypes.PROMOS_LOADING
 });
 
-export const promosFailed = (errormsg) => ({
+export const promosFailed = errormsg => ({
   type: actionTypes.PROMOS_FAILED,
-  payload: errormsg,
+  payload: errormsg
 });
 
-export const addReview = (review) => ({
+export const addReview = review => ({
   type: actionTypes.ADD_REVIEW,
-  payload: review,
+  payload: review
 });
 
-export const postReview = (courseId, value, author, comment) => (dispatch) => {
+export const postReview = (courseId, value, author, comment) => dispatch => {
   const newRating = {
     courseId: courseId,
     value: value,
     author: author,
-    comment: comment,
+    comment: comment
   };
   newRating.date = new Date().toISOString();
 
@@ -178,12 +178,12 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
     body: JSON.stringify(newRating),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("RoboKey"),
+      Authorization: "Bearer " + localStorage.getItem("RoboKey")
     },
-    credentials: "same-origin",
+    credentials: "same-origin"
   })
     .then(
-      (response) => {
+      response => {
         if (response.ok) {
           return response;
         } else {
@@ -194,17 +194,17 @@ export const postReview = (courseId, value, author, comment) => (dispatch) => {
           throw error;
         }
       },
-      (error) => {
+      error => {
         let errormsg = new Error(error.message);
         throw errormsg;
       }
     )
-    .then((response) => response.json())
-    .then((response) => {
+    .then(response => response.json())
+    .then(response => {
       dispatch(addReview(newRating));
       console.log(response);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log("Post comments ", error.message);
       alert("Your comment could not be posted \n" + error.message);
     });
@@ -217,7 +217,7 @@ export const postFeedback = (
   agree,
   contactType,
   message
-) => (dispatch) => {
+) => dispatch => {
   console.log(firstname);
 
   const newFeeback = {
@@ -227,7 +227,7 @@ export const postFeedback = (
     email: email,
     agree: agree,
     contactType: contactType,
-    message: message,
+    message: message
   };
   newFeeback.date = new Date().toISOString();
 
@@ -235,12 +235,12 @@ export const postFeedback = (
     method: "POST",
     body: JSON.stringify(newFeeback),
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    credentials: "same-origin",
+    credentials: "same-origin"
   })
     .then(
-      (response) => {
+      response => {
         if (response.ok) {
           return response;
         } else {
@@ -251,15 +251,15 @@ export const postFeedback = (
           throw error;
         }
       },
-      (error) => {
+      error => {
         throw error;
       }
     )
-    .then((response) => response.json())
-    .then((response) =>
+    .then(response => response.json())
+    .then(response =>
       alert("Thank you for your Intrest!\n" + JSON.stringify(response))
     )
-    .catch((error) => {
+    .catch(error => {
       console.log("Your feedback/enquiry haven't posted");
       alert(
         "Your feedback/enquiry could not be posted\nError: " + error.message
@@ -267,61 +267,21 @@ export const postFeedback = (
     });
 };
 
-export const userRegister = (username, email, password) => () => {
-  const newUser = {
-    name: username,
-    email: email,
-    password: password,
-  };
-  return fetch(baseUrl + "user/signup", {
-    method: "POST",
-    body: JSON.stringify(newUser),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "same-origin",
-  })
-    .then(
-      (response) => {
-        if (response.ok) {
-          return response;
-        } else {
-          var error = new Error(
-            "Error " + response.status + ": " + response.statusText
-          );
-          error.response = response;
-          throw error;
-        }
-      },
-      (error) => {
-        throw error;
-      }
-    )
-    .then((response) => response.json())
-    .then((response) =>
-      alert("Thank you for registering !\n" + JSON.stringify(response))
-    )
-    .catch((error) => {
-      console.log(error);
-      alert("User not created" + error.message);
-    });
-};
-
-export const loginUser = (email, password) => (dispatch) => {
+export const loginUser = (email, password) => dispatch => {
   const loginUser = {
     email: email,
-    password: password,
+    password: password
   };
   return fetch(baseUrl + "user/login", {
     method: "POST",
     body: JSON.stringify(loginUser),
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    credentials: "same-origin",
+    credentials: "same-origin"
   })
     .then(
-      (response) => {
+      response => {
         if (response.ok) {
           return response;
         } else {
@@ -332,12 +292,12 @@ export const loginUser = (email, password) => (dispatch) => {
           throw error;
         }
       },
-      (error) => {
+      error => {
         throw error;
       }
     )
-    .then((response) => response.json())
-    .then((response) => {
+    .then(response => response.json())
+    .then(response => {
       console.log(response);
       localStorage.setItem("RoboKey", response.token);
       localStorage.setItem("RoboName", response.name);
@@ -356,13 +316,13 @@ export const loginUser = (email, password) => (dispatch) => {
       );
       window.location = "/profile";
     })
-    .catch((error) => {
+    .catch(error => {
       console.log(error);
       alert("Wrong Credentials/ Kindly check email or password");
     });
 };
 
-export const LogOutUser = () => (dispatch) => {
+export const LogOutUser = () => dispatch => {
   dispatch(loggedOutUser());
 };
 export const loggedinUser = (email, username, id, image, usercourses) => ({
@@ -372,10 +332,10 @@ export const loggedinUser = (email, username, id, image, usercourses) => ({
     username: username,
     id: id,
     profilepic: image,
-    courses: usercourses,
-  },
+    courses: usercourses
+  }
 });
 export const loggedOutUser = () => ({
   type: actionTypes.LOGOUT_USER,
-  payload: {},
+  payload: {}
 });

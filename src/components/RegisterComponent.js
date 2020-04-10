@@ -3,22 +3,53 @@ import { Label, Col, Row, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Control, Form, Errors } from "react-redux-form";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const required = (value) => value && value.length;
-const maxLength = (length) => (value) => !value || value.length <= length;
-const minLength = (length) => (value) => value && value.length >= length;
-const validEmail = (value) =>
+const required = value => value && value.length;
+const maxLength = length => value => !value || value.length <= length;
+const minLength = length => value => value && value.length >= length;
+const validEmail = value =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,10}$/i.test(value);
 
 class Register extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
   handleSubmit(values) {
-    this.props.userRegister(values.username, values.email, values.password);
+    console.log(values);
+    let form_data = new FormData();
+
+    form_data.append(
+      "profileImage",
+      values.profileImage[0],
+      values.profileImage.name
+    );
+
+    form_data.append("name", values.username);
+    form_data.append("email", values.email);
+    form_data.append("password", values.password);
+    let url = "http://localhost:3001/user/signup/";
+    axios
+      .post(url, form_data, {
+        headers: {
+          "content-type": "multipart/form-data"
+        }
+      })
+      .then(
+        response => {
+          if (response.status === 201) {
+            alert("User created");
+          } else {
+            var error = new Error(
+              "Error " + response.status + ": " + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        error => {
+          throw error;
+        }
+      )
+      .catch(err => alert("User not created check email ID" + err));
+
     this.props.resetUserDetails();
   }
 
@@ -30,7 +61,7 @@ class Register extends Component {
             <Link
               to="/home"
               style={{
-                color: "#0b0704",
+                color: "#0b0704"
               }}
             >
               Home
@@ -44,7 +75,7 @@ class Register extends Component {
             <hr></hr>
             <Form
               model="register"
-              onSubmit={(values) => this.handleSubmit(values)}
+              onSubmit={values => this.handleSubmit(values)}
             >
               <Row className="form-group">
                 <Label htmlFor="username" md={3}>
@@ -60,7 +91,7 @@ class Register extends Component {
                     validators={{
                       required,
                       minLength: minLength(6),
-                      maxLength: maxLength(16),
+                      maxLength: maxLength(16)
                     }}
                   />
                   <Errors
@@ -70,7 +101,7 @@ class Register extends Component {
                     messages={{
                       required: "Required ",
                       minLength: "Must be greater than 6 characters ",
-                      maxLength: "Must be 16 characters or less ",
+                      maxLength: "Must be 16 characters or less "
                     }}
                   />
                 </Col>
@@ -95,7 +126,7 @@ class Register extends Component {
                     show="touched"
                     messages={{
                       required: "Required ",
-                      validEmail: "Invalid email address ",
+                      validEmail: "Invalid email address "
                     }}
                   />
                 </Col>
@@ -114,7 +145,7 @@ class Register extends Component {
                     validators={{
                       required,
                       minLength: minLength(8),
-                      maxLength: maxLength(16),
+                      maxLength: maxLength(16)
                     }}
                   />
                   <Errors
@@ -124,9 +155,22 @@ class Register extends Component {
                     messages={{
                       required: "Required ",
                       minLength: "Must be greater than 8 characters ",
-                      maxLength: "Must be 16 characters or less ",
+                      maxLength: "Must be 16 characters or less "
                     }}
                   />
+                </Col>
+              </Row>
+              <Row className="form-group">
+                <Label htmlFor="profileImage" md={3}>
+                  Profile Picture
+                </Label>
+                <Col md={9}>
+                  <Control.file
+                    model=".profileImage"
+                    id="profileImage"
+                    required
+                    className="custom-file"
+                  ></Control.file>
                 </Col>
               </Row>
 

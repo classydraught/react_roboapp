@@ -20,22 +20,21 @@ import {
   fetchReviews,
   postReview,
   postFeedback,
-  userRegister,
   loginUser,
-  LogOutUser,
+  LogOutUser
 } from "../redux/ActionCreators";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     courses: state.courses,
     members: state.members,
     reviews: state.reviews,
     promotions: state.promotions,
-    user: state.user,
+    user: state.user
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   fetchCourses: () => {
     dispatch(fetchCourses());
   },
@@ -73,9 +72,7 @@ const mapDispatchToProps = (dispatch) => ({
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
   },
-  userRegister: (username, email, password) => {
-    dispatch(userRegister(username, email, password));
-  },
+
   resetUserDetails: () => {
     dispatch(actions.reset("register"));
   },
@@ -84,7 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   LogOutUser: () => {
     dispatch(LogOutUser());
-  },
+  }
 });
 
 class Main extends Component {
@@ -119,19 +116,17 @@ class Main extends Component {
       return (
         <Home
           course={
-            this.props.courses.courses.filter((course) => course.featured)[0]
+            this.props.courses.courses.filter(course => course.featured)[0]
           }
           courseLoading={this.props.courses.isLoading}
           courseErrorMsg={this.props.courses.errMess}
           promotion={
-            this.props.promotions.promotions.filter(
-              (promo) => promo.featured
-            )[0]
+            this.props.promotions.promotions.filter(promo => promo.featured)[0]
           }
           promosLoading={this.props.promotions.isLoading}
           promosErrorMsg={this.props.promotions.errMess}
           member={
-            this.props.members.members.filter((member) => member.featured)[0]
+            this.props.members.members.filter(member => member.featured)[0]
           }
           memberLoading={this.props.members.isLoading}
           memberErrorMsg={this.props.members.errMess}
@@ -143,13 +138,13 @@ class Main extends Component {
         <CourseDetail
           course={
             this.props.courses.courses.filter(
-              (course) => course._id === match.params.courseId
+              course => course._id === match.params.courseId
             )[0]
           }
           isLoading={this.props.courses.isLoading}
           errMess={this.props.courses.errMess}
           reviews={this.props.reviews.reviews.filter(
-            (review) => review.courseId === match.params.courseId
+            review => review.courseId === match.params.courseId
           )}
           reviewserrMess={this.props.reviews.errMess}
           postReview={this.props.postReview}
@@ -206,10 +201,7 @@ class Main extends Component {
                 exact
                 path="/register"
                 component={() => (
-                  <Register
-                    userRegister={this.props.userRegister}
-                    resetUserDetails={this.props.resetUserDetails}
-                  />
+                  <Register resetUserDetails={this.props.resetUserDetails} />
                 )}
               />
 

@@ -5,10 +5,11 @@ export const InitialFeedback = {
   email: "",
   agree: false,
   contactType: "Phone",
-  message: "",
+  message: ""
 };
 export const RegisterDetails = {
   username: "",
   email: "",
   password: "",
+  profileImage: null
 };
