@@ -12,3 +12,4 @@ export const MEMBERS_FAILED = "MEMBERS_FAILED";
 export const REVIEWS_FAILED = "REVIEWS_FAILED";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const ADD_USER_COURSE = "ADD_USER_COURSE";

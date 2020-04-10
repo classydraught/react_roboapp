@@ -11,5 +11,14 @@ export const RegisterDetails = {
   username: "",
   email: "",
   password: "",
-  profileImage: null
+  profileImage: ""
+};
+
+export const addCourseDetails = {
+  name: "",
+  price: "",
+  category: "",
+  featured: false,
+  description: "",
+  courseImage: ""
 };

@@ -13,7 +13,7 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
+  Input
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import Button from "@material-ui/core/Button";
@@ -22,7 +22,7 @@ import {
   Dropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem
 } from "reactstrap";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
@@ -34,7 +34,7 @@ class Header extends Component {
     this.state = {
       isNavOpen: false,
       isModalOpen: false,
-      isdropdownOpen: false,
+      isdropdownOpen: false
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -44,17 +44,17 @@ class Header extends Component {
 
   toggleNav() {
     this.setState({
-      isNavOpen: !this.state.isNavOpen,
+      isNavOpen: !this.state.isNavOpen
     });
   }
   toggleModal() {
     this.setState({
-      isModalOpen: !this.state.isModalOpen,
+      isModalOpen: !this.state.isModalOpen
     });
   }
   toggleDropdown() {
     this.setState({
-      isdropdownOpen: !this.state.isdropdownOpen,
+      isdropdownOpen: !this.state.isdropdownOpen
     });
   }
 
@@ -128,7 +128,7 @@ class Header extends Component {
                               to="/profile"
                               style={{
                                 color: "#0b0704",
-                                textDecoration: "none",
+                                textDecoration: "none"
                               }}
                             >
                               <Avatar
@@ -142,10 +142,10 @@ class Header extends Component {
                           <Divider />
                           <DropdownItem>
                             <Link
-                              to="/home"
+                              to="/addcourse"
                               style={{
                                 color: "#0b0704",
-                                textDecoration: "none",
+                                textDecoration: "none"
                               }}
                             >
                               <i className="fa fa-plus-circle"></i>
@@ -193,7 +193,7 @@ class Header extends Component {
                   type="text"
                   id="username"
                   name="username"
-                  innerRef={(input) => (this.username = input)}
+                  innerRef={input => (this.username = input)}
                 />
               </FormGroup>
               <FormGroup>
@@ -202,7 +202,7 @@ class Header extends Component {
                   type="password"
                   id="password"
                   name="password"
-                  innerRef={(input) => (this.password = input)}
+                  innerRef={input => (this.password = input)}
                 />
               </FormGroup>
               <FormGroup check>
@@ -210,7 +210,7 @@ class Header extends Component {
                   <Input
                     type="checkbox"
                     name="remember"
-                    innerRef={(input) => (this.remember = input)}
+                    innerRef={input => (this.remember = input)}
                   />
                   Remember me
                 </Label>

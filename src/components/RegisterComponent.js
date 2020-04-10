@@ -4,6 +4,7 @@ import { Control, Form, Errors } from "react-redux-form";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { baseUrl } from "../shared/baseUrl";
 
 const required = value => value && value.length;
 const maxLength = length => value => !value || value.length <= length;
@@ -25,7 +26,8 @@ class Register extends Component {
     form_data.append("name", values.username);
     form_data.append("email", values.email);
     form_data.append("password", values.password);
-    let url = "http://localhost:3001/user/signup/";
+    let url = baseUrl + "user/signup/";
+    console.log(url);
     axios
       .post(url, form_data, {
         headers: {

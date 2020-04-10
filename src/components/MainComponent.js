@@ -5,6 +5,7 @@ import Home from "./HomeComponent";
 import Register from "./RegisterComponent";
 import CourseDetail from "./CourseDetailComponent";
 import Profile from "./ProfileComponent";
+import AddCourse from "./AddingCourseComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Course from "./CourseComponent";
 import Contact from "./ContactComponent";
@@ -21,7 +22,8 @@ import {
   postReview,
   postFeedback,
   loginUser,
-  LogOutUser
+  LogOutUser,
+  addUserCourse
 } from "../redux/ActionCreators";
 
 const mapStateToProps = state => {
@@ -46,6 +48,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchReviews: () => {
     dispatch(fetchReviews());
+  },
+  addUserCourse: course => {
+    dispatch(addUserCourse(course));
   },
   postReview: (courseID, value, author, comment) =>
     dispatch(postReview(courseID, value, author, comment)),
@@ -184,6 +189,16 @@ class Main extends Component {
                   <Profile
                     user={this.props.user}
                     courses={this.CourseCatalog()}
+                  />
+                )}
+              />
+              <Route
+                exacr
+                path="/addcourse"
+                component={() => (
+                  <AddCourse
+                    user={this.props.user}
+                    addUserCourse={this.props.addUserCourse}
                   />
                 )}
               />

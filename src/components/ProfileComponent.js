@@ -18,28 +18,28 @@ import { baseUrl } from "../shared/baseUrl";
 import { FadeTransform } from "react-animation-components";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 345
   },
   media: {
     height: 0,
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "56.25%" // 16:9
   },
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: "rotate(180deg)"
   },
   avatar: {
     backgroundColor: lime["A200"],
-    color: grey[900],
-  },
+    color: grey[900]
+  }
 }));
 
 function RenderCourse({ course }) {
@@ -53,7 +53,7 @@ function RenderCourse({ course }) {
       <FadeTransform
         in
         transformProps={{
-          exitTransform: "scale(0.2) translateY(-20%)",
+          exitTransform: "scale(0.2) translateY(-20%)"
         }}
       >
         <Card className="profile-coursecard">
@@ -82,7 +82,7 @@ function RenderCourse({ course }) {
             </IconButton>
             <IconButton
               className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
+                [classes.expandOpen]: expanded
               })}
               onClick={handleExpandClick}
               aria-expanded={expanded}
@@ -110,7 +110,7 @@ function Profile(props) {
             <Link
               to="/home"
               style={{
-                color: "#0b0704",
+                color: "#0b0704"
               }}
             >
               Home
@@ -123,7 +123,7 @@ function Profile(props) {
             <FadeTransform
               in
               transformProps={{
-                exitTransform: "scale(0.2) translateY(-20%)",
+                exitTransform: "scale(0.2) translateY(-20%)"
               }}
             >
               <div className="card my-3 profilecard">
@@ -154,7 +154,7 @@ function Profile(props) {
             <h3 className="text-center">My Courses</h3>
             <Divider className="mb-3" />
             <div className="row">
-              {props.courses.map((course) => (
+              {props.courses.map(course => (
                 <RenderCourse course={course} />
               ))}
             </div>

@@ -218,8 +218,6 @@ export const postFeedback = (
   contactType,
   message
 ) => dispatch => {
-  console.log(firstname);
-
   const newFeeback = {
     firstname: firstname,
     lastname: lastname,
@@ -298,7 +296,6 @@ export const loginUser = (email, password) => dispatch => {
     )
     .then(response => response.json())
     .then(response => {
-      console.log(response);
       localStorage.setItem("RoboKey", response.token);
       localStorage.setItem("RoboName", response.name);
       localStorage.setItem("RoboMail", response.email);
@@ -338,4 +335,12 @@ export const loggedinUser = (email, username, id, image, usercourses) => ({
 export const loggedOutUser = () => ({
   type: actionTypes.LOGOUT_USER,
   payload: {}
+});
+
+export const addUserCourse = course => dispatch => {
+  dispatch(addCoursetoCourses(course));
+};
+export const addCoursetoCourses = course => ({
+  type: actionTypes.ADD_USER_COURSE,
+  payload: course
 });

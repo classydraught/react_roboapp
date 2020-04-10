@@ -10,16 +10,44 @@ function Footer(props) {
             <h5>Links</h5>
             <ul className="list-unstyled">
               <li>
-                <Link to="/home">Home</Link>
+                <Link
+                  to="/home"
+                  style={{
+                    color: "#0b0704"
+                  }}
+                >
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/aboutus">About Us</Link>
+                <Link
+                  to="/aboutus"
+                  style={{
+                    color: "#0b0704"
+                  }}
+                >
+                  About Us
+                </Link>
               </li>
               <li>
-                <Link to="/courses">Courses</Link>
+                <Link
+                  to="/courses"
+                  style={{
+                    color: "#0b0704"
+                  }}
+                >
+                  Courses
+                </Link>
               </li>
               <li>
-                <Link to="/contactus">Contact Us</Link>
+                <Link
+                  to="/contactus"
+                  style={{
+                    color: "#0b0704"
+                  }}
+                >
+                  Contact Us
+                </Link>
               </li>
             </ul>
           </div>
@@ -37,7 +65,14 @@ function Footer(props) {
               <i className="fa fa-fax fa-lg"></i>: +91 8297972202
               <br />
               <i className="fa fa-envelope fa-lg"></i>:{" "}
-              <a href="mailto:cskavi34@gmail.com">cskavi34@gmail.com</a>
+              <a
+                href="mailto:cskavi34@gmail.com"
+                style={{
+                  color: "#0b0704"
+                }}
+              >
+                cskavi34@gmail.com
+              </a>
             </address>
           </div>
           <div className="col-12 col-sm-4 align-self-center">

@@ -7,7 +7,7 @@ import { Promotions } from "./promotions";
 import { Reviews } from "./reviews";
 import { User } from "./user";
 import { createForms } from "react-redux-form";
-import { InitialFeedback, RegisterDetails } from "./forms";
+import { InitialFeedback, RegisterDetails, addCourseDetails } from "./forms";
 
 export const storeConfig = () => {
   const store = createStore(
@@ -20,6 +20,7 @@ export const storeConfig = () => {
 
       ...createForms({ feedback: InitialFeedback }),
       ...createForms({ register: RegisterDetails }),
+      ...createForms({ CourseDetails: addCourseDetails })
     }),
     applyMiddleware(thunk, logger)
   );

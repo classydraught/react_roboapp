@@ -3,7 +3,7 @@ export const Courses = (
   state = {
     isLoading: true,
     errMess: null,
-    courses: [],
+    courses: []
   },
   action
 ) => {
@@ -13,7 +13,7 @@ export const Courses = (
         ...state,
         isLoading: false,
         errMess: null,
-        courses: action.payload,
+        courses: action.payload
       };
 
     case actionTypes.COURSES_LOADING:
@@ -24,7 +24,12 @@ export const Courses = (
         ...state,
         isLoading: false,
         errMess: action.payload,
-        courses: [],
+        courses: []
+      };
+    case actionTypes.ADD_USER_COURSE:
+      return {
+        ...state,
+        courses: state.courses.concat(action.payload)
       };
 
     default:
