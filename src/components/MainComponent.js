@@ -88,11 +88,31 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.CourseCatalog = this.CourseCatalog.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchCourses();
     this.props.fetchMembers();
     this.props.fetchPromotions();
     this.props.fetchReviews();
+  }
+  CourseCatalog() {
+    if (this.props.user.LoggedIn) {
+      const UserCourses = [];
+      for (let id of this.props.user.UserData.usercourses) {
+        for (let course of this.props.courses.courses) {
+          if (course._id === id) {
+            UserCourses.push(course);
+          }
+        }
+      }
+      return UserCourses;
+    } else {
+      return;
+    }
   }
   render() {
     const HomePage = () => {
@@ -165,7 +185,12 @@ class Main extends Component {
               <Route
                 exact
                 path="/profile"
-                component={() => <Profile user={this.props.user} />}
+                component={() => (
+                  <Profile
+                    user={this.props.user}
+                    courses={this.CourseCatalog()}
+                  />
+                )}
               />
               <Route
                 exact

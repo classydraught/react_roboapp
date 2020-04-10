@@ -8,7 +8,9 @@ export const User = (
       email: localStorage.getItem("RoboMail"),
       propic: localStorage.getItem("profilepic"),
       id: localStorage.getItem("id"),
-      usercourses: localStorage.getItem("courses"),
+      usercourses: localStorage.getItem("RoboName")
+        ? localStorage.getItem("courses").split(",")
+        : null,
     },
     errMess: null,
   },

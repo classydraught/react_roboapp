@@ -238,7 +238,7 @@ function RenderCourse({ course, reviews }) {
           exitTransform: "scale(0.2) translateY(-20%)",
         }}
       >
-        <div className="card">
+        <div className="card profile-coursecard">
           <CardImg top src={baseUrl + course.image} alt={course.name} />
           <CardBody>
             <CardTitle>{course.name}</CardTitle>
@@ -308,10 +308,24 @@ const CourseDetail = (props) => {
         <div className="row">
           <Breadcrumb>
             <BreadcrumbItem>
-              <Link to="/home">Home</Link>
+              <Link
+                to="/home"
+                style={{
+                  color: "#0b0704",
+                }}
+              >
+                Home
+              </Link>
             </BreadcrumbItem>
             <BreadcrumbItem>
-              <Link to="/courses">Courses</Link>
+              <Link
+                to="/courses"
+                style={{
+                  color: "#0b0704",
+                }}
+              >
+                Courses
+              </Link>
             </BreadcrumbItem>
             <BreadcrumbItem active>{props.course.name}</BreadcrumbItem>
           </Breadcrumb>

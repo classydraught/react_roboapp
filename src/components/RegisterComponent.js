@@ -27,7 +27,14 @@ class Register extends Component {
       <div className="container">
         <Breadcrumb>
           <BreadcrumbItem>
-            <Link to="/home">Home</Link>
+            <Link
+              to="/home"
+              style={{
+                color: "#0b0704",
+              }}
+            >
+              Home
+            </Link>
           </BreadcrumbItem>
           <BreadcrumbItem active>Register</BreadcrumbItem>
         </Breadcrumb>

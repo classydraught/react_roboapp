@@ -61,7 +61,7 @@ function RenderCard({ item, isLoading, errMess, itemInfo }) {
           exitTransform: "scale(0.2) translateY(-20%)",
         }}
       >
-        <Card className={classes.root}>
+        <Card className="profile-coursecard">
           <CardHeader
             avatar={
               <Avatar

@@ -37,7 +37,14 @@ class Contact extends Component {
         <div className="row">
           <Breadcrumb>
             <BreadcrumbItem>
-              <Link to="/home">Home</Link>
+              <Link
+                to="/home"
+                style={{
+                  color: "#0b0704",
+                }}
+              >
+                Home
+              </Link>
             </BreadcrumbItem>
             <BreadcrumbItem active>Contact</BreadcrumbItem>
           </Breadcrumb>

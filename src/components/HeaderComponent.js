@@ -132,12 +132,11 @@ class Header extends Component {
                               }}
                             >
                               <Avatar
-                                className="mx-auto"
+                                className="mx-auto mb-2"
                                 src={
                                   baseUrl + localStorage.getItem("profilepic")
                                 }
                               />
-                              {console.log(this.props.user)}
                             </Link>
                           </DropdownItem>
                           <Divider />

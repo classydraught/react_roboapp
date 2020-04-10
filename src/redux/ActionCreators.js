@@ -354,6 +354,7 @@ export const loginUser = (email, password) => (dispatch) => {
           response.courses
         )
       );
+      window.location = "/profile";
     })
     .catch((error) => {
       console.log(error);
