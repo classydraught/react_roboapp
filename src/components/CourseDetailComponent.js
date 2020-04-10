@@ -31,6 +31,7 @@ import { FadeTransform, Stagger, Fade } from "react-animation-components";
 import Button from "@material-ui/core/Button";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 const required = value => value && value.length;
 const maxLength = length => value => !value || value.length <= length;
@@ -47,6 +48,7 @@ class ReviewForm extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleComment = this.handleComment.bind(this);
+    this.purchase = this.purchase.bind(this);
   }
 
   handleInputChange(event) {
@@ -68,6 +70,9 @@ class ReviewForm extends Component {
       values.comment
     );
   }
+  purchase() {
+    this.props.purchaseCourse(localStorage.getItem("id"), this.props.courseId);
+  }
   toggleModal() {
     this.setState({
       isModalOpen: !this.state.isModalOpen
@@ -75,12 +80,25 @@ class ReviewForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <>
-        <Button variant="outlined" onClick={this.toggleModal} size="large">
-          <RateReviewIcon />
-          &nbsp;&nbsp;Add review
-        </Button>
+        {localStorage.getItem("RoboKey") ? (
+          localStorage
+            .getItem("courses")
+            .split(",")
+            .includes(this.props.courseId) ? (
+            <Button variant="outlined" onClick={this.toggleModal} size="large">
+              <RateReviewIcon />
+              &nbsp;&nbsp;Add review
+            </Button>
+          ) : (
+            <Button variant="outlined" size="large" onClick={this.purchase}>
+              <ShoppingBasketIcon />
+              &nbsp;&nbsp; Add course
+            </Button>
+          )
+        ) : null}
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Submit comment</ModalHeader>
           <ModalBody>
@@ -238,7 +256,7 @@ function RenderCourse({ course, reviews }) {
   );
 }
 
-function RenderReviews({ reviews, courseId, postReview }) {
+function RenderReviews({ reviews, courseId, postReview, purchaseCourse }) {
   if (reviews != null) {
     return (
       <div className="col-12 col-md-5 m-1">
@@ -257,7 +275,11 @@ function RenderReviews({ reviews, courseId, postReview }) {
             })}
           </Stagger>
         </ul>
-        <ReviewForm courseId={courseId} postReview={postReview} />
+        <ReviewForm
+          courseId={courseId}
+          postReview={postReview}
+          purchaseCourse={purchaseCourse}
+        />
       </div>
     );
   } else {
@@ -266,6 +288,7 @@ function RenderReviews({ reviews, courseId, postReview }) {
 }
 
 const CourseDetail = props => {
+  console.log(props);
   if (props.isLoading) {
     return (
       <div className="container">
@@ -307,11 +330,10 @@ const CourseDetail = props => {
                 Courses
               </Link>
             </BreadcrumbItem>
-            <BreadcrumbItem active>{props.course.name}</BreadcrumbItem>
+            <BreadcrumbItem active>{props.course.name}</BreadcrumbItem>{" "}
           </Breadcrumb>
-          <div className="col-12">
-            <h3>{props.course.name}</h3>
-            <hr />
+          <div className="col-12 col-6">
+            <h3>{props.course.name}</h3> <hr />
           </div>
         </div>
         <div className="row">
@@ -320,6 +342,7 @@ const CourseDetail = props => {
             reviews={props.reviews}
             courseId={props.course._id}
             postReview={props.postReview}
+            purchaseCourse={props.purchaseCourse}
           />
         </div>
       </div>

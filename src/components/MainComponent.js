@@ -23,7 +23,8 @@ import {
   postFeedback,
   loginUser,
   LogOutUser,
-  addUserCourse
+  addUserCourse,
+  purchaseCourse
 } from "../redux/ActionCreators";
 
 const mapStateToProps = state => {
@@ -86,6 +87,9 @@ const mapDispatchToProps = dispatch => ({
   },
   LogOutUser: () => {
     dispatch(LogOutUser());
+  },
+  purchaseCourse: (userId, CourseId) => {
+    dispatch(purchaseCourse(userId, CourseId));
   }
 });
 
@@ -104,7 +108,7 @@ class Main extends Component {
   CourseCatalog() {
     if (this.props.user.LoggedIn) {
       const UserCourses = [];
-      for (let id of this.props.user.UserData.usercourses) {
+      for (let id of localStorage.getItem("courses").split(",")) {
         for (let course of this.props.courses.courses) {
           if (course._id === id) {
             UserCourses.push(course);
@@ -141,6 +145,7 @@ class Main extends Component {
     const CourseDetailId = ({ match }) => {
       return (
         <CourseDetail
+          purchaseCourse={this.props.purchaseCourse}
           course={
             this.props.courses.courses.filter(
               course => course._id === match.params.courseId

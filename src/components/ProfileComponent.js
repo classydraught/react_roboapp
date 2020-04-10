@@ -128,7 +128,7 @@ function Profile(props) {
             >
               <div className="card my-3 profilecard">
                 <CardImg
-                  src={baseUrl + props.user.UserData.propic}
+                  src={baseUrl + localStorage.getItem("profilepic")}
                   className="image--cover mx-auto"
                 />
                 <h3>{props.user.UserData.username}</h3>

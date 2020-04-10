@@ -4,11 +4,11 @@ import { Breadcrumb, BreadcrumbItem, Label, Col, Row } from "reactstrap";
 import { Control, Form, Errors } from "react-redux-form";
 import Button from "@material-ui/core/Button";
 
-const required = (value) => value && value.length;
-const maxLength = (length) => (value) => !value || value.length <= length;
-const minLength = (length) => (value) => value && value.length >= length;
-const isNumber = (value) => !isNaN(Number(value));
-const validEmail = (value) =>
+const required = value => value && value.length;
+const maxLength = length => value => !value || value.length <= length;
+const minLength = length => value => value && value.length >= length;
+const isNumber = value => !isNaN(Number(value));
+const validEmail = value =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,10}$/i.test(value);
 
 class Contact extends Component {
@@ -40,7 +40,7 @@ class Contact extends Component {
               <Link
                 to="/home"
                 style={{
-                  color: "#0b0704",
+                  color: "#0b0704"
                 }}
               >
                 Home
@@ -107,7 +107,7 @@ class Contact extends Component {
             <hr></hr>
             <Form
               model="feedback"
-              onSubmit={(values) => this.handleSubmit(values)}
+              onSubmit={values => this.handleSubmit(values)}
             >
               <Row className="form-group">
                 <Label htmlFor="firstname" md={3}>
@@ -123,7 +123,7 @@ class Contact extends Component {
                     validators={{
                       required,
                       minLength: minLength(3),
-                      maxLength: maxLength(16),
+                      maxLength: maxLength(16)
                     }}
                   />
                   <Errors
@@ -133,7 +133,7 @@ class Contact extends Component {
                     messages={{
                       required: "Required ",
                       minLength: "Must be greater than 2 characters ",
-                      maxLength: "Must be 16 characters or less ",
+                      maxLength: "Must be 16 characters or less "
                     }}
                   />
                 </Col>
@@ -152,7 +152,7 @@ class Contact extends Component {
                     validators={{
                       required,
                       minLength: minLength(3),
-                      maxLength: maxLength(32),
+                      maxLength: maxLength(32)
                     }}
                   />
                   <Errors
@@ -162,7 +162,7 @@ class Contact extends Component {
                     messages={{
                       required: "Required ",
                       minLength: "Must be greater than 2 characters ",
-                      maxLength: "Must be 32 characters or less ",
+                      maxLength: "Must be 32 characters or less "
                     }}
                   />
                 </Col>
@@ -182,7 +182,7 @@ class Contact extends Component {
                       required,
                       minLength: minLength(3),
                       maxLength: maxLength(16),
-                      isNumber,
+                      isNumber
                     }}
                   />
                   <Errors
@@ -193,7 +193,7 @@ class Contact extends Component {
                       required: "Required ",
                       minLength: "Must be greater than 2 numbers ",
                       maxLength: "Must be 16 numbers or less ",
-                      isNumber: "Must be numbers ",
+                      isNumber: "Must be numbers "
                     }}
                   />
                 </Col>
@@ -217,7 +217,7 @@ class Contact extends Component {
                     show="touched"
                     messages={{
                       required: "Required ",
-                      validEmail: "Invalid email address ",
+                      validEmail: "Invalid email address "
                     }}
                   />
                 </Col>
@@ -265,7 +265,7 @@ class Contact extends Component {
                     model=".message"
                     show="touched"
                     messages={{
-                      required: "Required ",
+                      required: "Required "
                     }}
                   />
                 </Col>

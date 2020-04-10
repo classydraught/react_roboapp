@@ -344,3 +344,30 @@ export const addCoursetoCourses = course => ({
   type: actionTypes.ADD_USER_COURSE,
   payload: course
 });
+
+export const purchaseCourse = (userId, courseId) => dispatch => {
+  const newCourse = {
+    userId: userId,
+    courseId: courseId
+  };
+  return fetch(baseUrl + "user/addCourse", {
+    method: "POST",
+    body: JSON.stringify(newCourse),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("RoboKey")
+    },
+    credentials: "same-origin"
+  })
+    .then(response => {
+      alert("Course Purchases");
+      dispatch(addpurchasedCourse(courseId));
+      console.log(response);
+    })
+    .catch(err => alert(err));
+};
+
+export const addpurchasedCourse = courseId => ({
+  type: actionTypes.ADD_PUR_COURSE,
+  payload: courseId
+});

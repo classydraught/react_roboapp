@@ -73,7 +73,7 @@ class Register extends Component {
         </Breadcrumb>
         <div className="row">
           <div className="col-12 col-md-9 mt-4">
-            <h2>We wont ask much!</h2>
+            <h2>No more boring learning!</h2>
             <hr></hr>
             <Form
               model="register"
