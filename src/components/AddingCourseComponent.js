@@ -99,7 +99,7 @@ class AddCourse extends Component {
                     placeholder="Course name"
                     validators={{
                       required,
-                      minLength: minLength(2),
+                      minLength: minLength(4),
                       maxLength: maxLength(16)
                     }}
                   />
@@ -109,7 +109,7 @@ class AddCourse extends Component {
                     show="touched"
                     messages={{
                       required: "Required ",
-                      minLength: "Must be greater than 6 characters ",
+                      minLength: "Must be greater than 4 characters ",
                       maxLength: "Must be 16 characters or less "
                     }}
                   />
@@ -169,8 +169,8 @@ class AddCourse extends Component {
                     placeholder="Category"
                     validators={{
                       required,
-                      minLength: minLength(8),
-                      maxLength: maxLength(16)
+                      minLength: minLength(6),
+                      maxLength: maxLength(30)
                     }}
                   />
                   <Errors
@@ -179,8 +179,8 @@ class AddCourse extends Component {
                     show="touched"
                     messages={{
                       required: "Required ",
-                      minLength: "Must be greater than 8 characters ",
-                      maxLength: "Must be 16 characters or less "
+                      minLength: "Must be greater than 6 characters ",
+                      maxLength: "Must be 30 characters or less "
                     }}
                   />
                 </Col>
@@ -195,8 +195,25 @@ class AddCourse extends Component {
                     id="description"
                     name="description"
                     required
+                    placeholder="description"
                     className="form-control"
+                    rows="8"
+                    validators={{
+                      required,
+                      minLength: minLength(100),
+                      maxLength: maxLength(200)
+                    }}
                   ></Control.textarea>
+                  <Errors
+                    className="text-danger"
+                    model=".description"
+                    show="touched"
+                    messages={{
+                      required: "Required ",
+                      minLength: "Must be greater than 100 characters ",
+                      maxLength: "Must be 200 characters or less "
+                    }}
+                  />
                 </Col>
               </Row>
               <Row className="form-group">

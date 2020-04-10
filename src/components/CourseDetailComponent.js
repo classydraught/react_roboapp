@@ -10,7 +10,7 @@ import {
   Row,
   Modal,
   ModalHeader,
-  ModalBody,
+  ModalBody
 } from "reactstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -32,9 +32,9 @@ import Button from "@material-ui/core/Button";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
-const required = (value) => value && value.length;
-const maxLength = (length) => (value) => !value || value.length <= length;
-const minLength = (length) => (value) => value && value.length >= length;
+const required = value => value && value.length;
+const maxLength = length => value => !value || value.length <= length;
+const minLength = length => value => value && value.length >= length;
 
 class ReviewForm extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class ReviewForm extends Component {
 
     this.state = {
       isModalOpen: false,
-      starRating: 0,
+      starRating: 0
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -55,7 +55,7 @@ class ReviewForm extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: parseInt(value),
+      [name]: parseInt(value)
     });
   }
   handleComment(values) {
@@ -63,13 +63,14 @@ class ReviewForm extends Component {
     this.props.postReview(
       this.props.courseId,
       this.state.starRating,
-      values.author,
+      localStorage.getItem("RoboName"),
+
       values.comment
     );
   }
   toggleModal() {
     this.setState({
-      isModalOpen: !this.state.isModalOpen,
+      isModalOpen: !this.state.isModalOpen
     });
   }
 
@@ -95,31 +96,6 @@ class ReviewForm extends Component {
               </Row>
 
               <Row className="form-group">
-                <Label htmlFor="author">Name</Label>
-                <Control.text
-                  model=".author"
-                  className="form-control"
-                  id="author"
-                  name="author"
-                  placeholder="Your name"
-                  validators={{
-                    required,
-                    minLength: minLength(3),
-                    maxLength: maxLength(15),
-                  }}
-                />
-                <Errors
-                  className="text-danger"
-                  model=".author"
-                  show="touched"
-                  messages={{
-                    required: "Required ",
-                    minLength: "Must be greater than 2 characters ",
-                    maxLength: "Must be 15 characters or less ",
-                  }}
-                />
-              </Row>
-              <Row className="form-group">
                 <Label htmlFor="comment">Comment</Label>
                 <Control.textarea
                   rows={6}
@@ -128,7 +104,11 @@ class ReviewForm extends Component {
                   id="comment"
                   name="comment"
                   placeholder="Your comment"
-                  validators={{ required, minLength: minLength(3) }}
+                  validators={{
+                    required,
+                    minLength: minLength(4),
+                    maxLength: maxLength(70)
+                  }}
                 />
                 <Errors
                   className="text-danger"
@@ -136,7 +116,7 @@ class ReviewForm extends Component {
                   show="touched"
                   messages={{
                     required: "Required ",
-                    minLength: "Must be greater than 2 characters ",
+                    minLength: "Must be greater than 2 characters "
                   }}
                 />
               </Row>
@@ -153,30 +133,30 @@ class ReviewForm extends Component {
   }
 }
 
-const totalRating = (reviews) => {
+const totalRating = reviews => {
   let sum = 0;
-  reviews.reviews.map((review) => (sum += review.value));
+  reviews.reviews.map(review => (sum += review.value));
   return sum / reviews.reviews.length;
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: "100vw",
+    maxWidth: "100vw"
   },
 
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
+      duration: theme.transitions.duration.shortest
+    })
   },
   expandOpen: {
-    transform: "rotate(180deg)",
+    transform: "rotate(180deg)"
   },
   avatar: {
-    backgroundColor: amber["A200"],
-  },
+    backgroundColor: amber["A200"]
+  }
 }));
 
 function RecipeReviewCard({ review }) {
@@ -202,7 +182,7 @@ function RecipeReviewCard({ review }) {
         subheader={new Intl.DateTimeFormat("en-US", {
           year: "numeric",
           month: "short",
-          day: "2-digit",
+          day: "2-digit"
         }).format(new Date(Date.parse(review.date)))}
       />
 
@@ -211,7 +191,7 @@ function RecipeReviewCard({ review }) {
         <span className="ml-5">
           <IconButton
             className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
+              [classes.expandOpen]: expanded
             })}
             onClick={handleExpandClick}
             aria-expanded={expanded}
@@ -235,10 +215,10 @@ function RenderCourse({ course, reviews }) {
       <FadeTransform
         in
         transformProps={{
-          exitTransform: "scale(0.2) translateY(-20%)",
+          exitTransform: "scale(0.2) translateY(-20%)"
         }}
       >
-        <div className="card profile-coursecard">
+        <div className="card profile-coursecard mb-3">
           <CardImg top src={baseUrl + course.image} alt={course.name} />
           <CardBody>
             <CardTitle>{course.name}</CardTitle>
@@ -266,7 +246,7 @@ function RenderReviews({ reviews, courseId, postReview }) {
         <hr />
         <ul className="list-unstyled">
           <Stagger in>
-            {reviews.map((review) => {
+            {reviews.map(review => {
               return (
                 <Fade in key={review._id}>
                   <li className="mb-3">
@@ -285,7 +265,7 @@ function RenderReviews({ reviews, courseId, postReview }) {
   }
 }
 
-const CourseDetail = (props) => {
+const CourseDetail = props => {
   if (props.isLoading) {
     return (
       <div className="container">
@@ -311,7 +291,7 @@ const CourseDetail = (props) => {
               <Link
                 to="/home"
                 style={{
-                  color: "#0b0704",
+                  color: "#0b0704"
                 }}
               >
                 Home
@@ -321,7 +301,7 @@ const CourseDetail = (props) => {
               <Link
                 to="/courses"
                 style={{
-                  color: "#0b0704",
+                  color: "#0b0704"
                 }}
               >
                 Courses
