@@ -78,6 +78,9 @@ const mapDispatchToProps = dispatch => ({
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
   },
+  resetCourseDetails: () => {
+    dispatch(actions.reset("CourseDetails"));
+  },
 
   resetUserDetails: () => {
     dispatch(actions.reset("register"));
@@ -204,6 +207,7 @@ class Main extends Component {
                   <AddCourse
                     user={this.props.user}
                     addUserCourse={this.props.addUserCourse}
+                    resetCourseDetails={this.props.resetCourseDetails}
                   />
                 )}
               />

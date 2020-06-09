@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "stop": "pkill -9 node",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

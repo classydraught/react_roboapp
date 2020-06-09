@@ -57,6 +57,7 @@ class AddCourse extends Component {
         }
       )
       .catch(err => alert("Course Not created" + err));
+    this.props.resetCourseDetails();
   }
   render() {
     if (this.props.user.LoggedIn)
@@ -234,7 +235,7 @@ class AddCourse extends Component {
               <Row className="form-group">
                 <Col md={{ size: 9, offset: 3 }}>
                   <Button type="submit" variant="outlined" size="medium">
-                    <i className="fa fa-user-plus"></i>&nbsp;&nbsp;Register
+                    <i className="fa fa-upload"></i>&nbsp;&nbsp;Upload
                   </Button>
                 </Col>
               </Row>

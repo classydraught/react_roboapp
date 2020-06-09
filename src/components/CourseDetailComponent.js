@@ -88,16 +88,16 @@ class ReviewForm extends Component {
             .getItem("courses")
             .split(",")
             .includes(this.props.courseId) ? (
-            <Button variant="outlined" onClick={this.toggleModal} size="large">
-              <RateReviewIcon />
+              <Button variant="outlined" onClick={this.toggleModal} size="large">
+                <RateReviewIcon />
               &nbsp;&nbsp;Add review
-            </Button>
-          ) : (
-            <Button variant="outlined" size="large" onClick={this.purchase}>
-              <ShoppingBasketIcon />
+              </Button>
+            ) : (
+              <Button variant="outlined" size="large" onClick={this.purchase}>
+                <ShoppingBasketIcon />
               &nbsp;&nbsp; Add course
-            </Button>
-          )
+              </Button>
+            )
         ) : null}
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Submit comment</ModalHeader>

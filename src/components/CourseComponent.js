@@ -12,6 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { lime, grey } from "@material-ui/core/colors";
+import { FadeTransform } from "react-animation-components";
 
 import { Link } from "react-router-dom";
 
@@ -93,7 +94,14 @@ const Course = props => {
   const courseCatalog = props.courses.courses.map(course => {
     return (
       <div key={course._id} className="col-12 col-md-5 m-1">
-        <RenderCourse course={course} />
+        <FadeTransform
+          in
+          transformProps={{
+            exitTransform: "scale(0.2) translateY(-20%)"
+          }}
+        >
+          <RenderCourse course={course} />
+        </FadeTransform>
       </div>
     );
   });
@@ -135,6 +143,7 @@ const Course = props => {
             <hr />
           </div>
         </div>
+
         <div className="row">{courseCatalog}</div>
       </div>
     );

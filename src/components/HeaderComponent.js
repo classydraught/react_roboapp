@@ -114,54 +114,54 @@ class Header extends Component {
                       </Button>
                     </NavItem>
                   ) : (
-                    <NavItem>
-                      <Dropdown
-                        isOpen={this.state.isdropdownOpen}
-                        toggle={this.toggleDropdown}
-                      >
-                        <DropdownToggle>
-                          <i className="fa fa-chevron-circle-down "></i>
-                        </DropdownToggle>
-                        <DropdownMenu>
-                          <DropdownItem>
-                            <Link
-                              to="/profile"
-                              style={{
-                                color: "#0b0704",
-                                textDecoration: "none"
-                              }}
-                            >
-                              <Avatar
-                                className="mx-auto mb-2"
-                                src={
-                                  baseUrl + localStorage.getItem("profilepic")
-                                }
-                              />
-                            </Link>
-                          </DropdownItem>
-                          <Divider />
-                          <DropdownItem>
-                            <Link
-                              to="/addcourse"
-                              style={{
-                                color: "#0b0704",
-                                textDecoration: "none"
-                              }}
-                            >
-                              <i className="fa fa-plus-circle"></i>
+                      <NavItem>
+                        <Dropdown
+                          isOpen={this.state.isdropdownOpen}
+                          toggle={this.toggleDropdown}
+                        >
+                          <DropdownToggle>
+                            <i className="fa fa-chevron-circle-down "></i>
+                          </DropdownToggle>
+                          <DropdownMenu>
+                            <DropdownItem>
+                              <Link
+                                to="/profile"
+                                style={{
+                                  color: "#0b0704",
+                                  textDecoration: "none"
+                                }}
+                              >
+                                <Avatar
+                                  className="mx-auto mb-2"
+                                  src={
+                                    baseUrl + localStorage.getItem("profilepic")
+                                  }
+                                />
+                              </Link>
+                            </DropdownItem>
+                            <Divider />
+                            <DropdownItem>
+                              <Link
+                                to="/addcourse"
+                                style={{
+                                  color: "#0b0704",
+                                  textDecoration: "none"
+                                }}
+                              >
+                                <i className="fa fa-plus-circle"></i>
                               &nbsp;&nbsp;Add a Course
                             </Link>
+                            </DropdownItem>
+                            <DropdownItem
+                              onClick={this.props.LogOutUser}
+                              color="#0b0704"
+                            >
+                              <i className="fa fa-sign-out"></i> Logout
                           </DropdownItem>
-                          <DropdownItem
-                            onClick={this.props.LogOutUser}
-                            color="#0b0704"
-                          >
-                            <i className="fa fa-sign-out"></i> Logout
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-                    </NavItem>
-                  )}
+                          </DropdownMenu>
+                        </Dropdown>
+                      </NavItem>
+                    )}
                 </Nav>
               </Collapse>
             </div>
